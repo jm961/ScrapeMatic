@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Results - {{ search_term }} | ScrapeMatic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+      :root {
+        --primary: #00ff88;
+        --secondary: #00d4ff;
+        --accent: #ff007a;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: #0a0a0a;
+        color: #ffffff;
+      }
+
+      .cyber-border {
+        border: 2px solid var(--primary);
+        box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
+        position: relative;
+        background: #111111;
+      }
+
+      .cyber-border::after {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border: 2px solid var(--secondary);
+        filter: blur(4px);
+        z-index: -1;
+      }
+
+      .neon-text {
+        text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+      }
+
+      .cyber-button {
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        transition: all 0.3s ease;
+        color: #000000;
+        font-weight: 700;
+      }
+
+      .cyber-button:hover {
+        filter: hue-rotate(45deg);
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body class="min-h-screen">
+    <nav class="bg-black/80 backdrop-blur-lg border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center space-x-3">
+            <div
+              class="h-9 w-9 cyber-border flex items-center justify-center bg-black"
+            >
+              <svg
+                class="w-5 h-5 text-[var(--primary)]"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                />
+              </svg>
+            </div>
+            <span class="text-xl font-bold neon-text">SCRAPEMATIC</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="mb-8">
+        <a
+          href="/"
+          class="inline-flex items-center text-[var(--primary)] hover:text-[var(--secondary)] transition-colors"
+        >
+          <svg
+            class="w-4 h-4 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 19l-7-7m0 0l7-7m-7 7h18"
+            />
+          </svg>
+          BACK TO SEARCH
+        </a>
+      </div>
+
+      <div class="text-center mb-12" data-aos="fade-up">
+        <h1 class="text-3xl font-bold text-[var(--primary)] mb-2 neon-text">
+          RESULTS FOR
+        </h1>
+        <p class="text-xl text-[var(--secondary)] font-medium">
+          {{ search_term }}
+        </p>
+      </div>
+
+      <div class="max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="100">
+        <div class="cyber-border rounded-xl p-8 backdrop-blur-xl">
+          <div class="text-center mb-6">
+            <svg
+              class="w-16 h-16 mx-auto text-[var(--primary)] mb-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+            <h3 class="text-2xl font-semibold text-[var(--primary)] neon-text">
+              DOWNLOAD RESULTS
+            </h3>
+            <p class="text-gray-400 mt-2">Choose your preferred format</p>
+          </div>
+
+          <div class="space-y-4">
+            <a
+              href="{{ url_for('download_file', filename=filename + '.xlsx') }}"
+              class="w-full cyber-button text-black py-4 px-6 text-lg hover:shadow-glow transition-all flex items-center justify-center gap-2"
+            >
+              DOWNLOAD EXCEL (.XLSX)
+            </a>
+            <a
+              href="{{ url_for('download_file', filename=filename + '.csv') }}"
+              class="w-full border-2 border-[var(--primary)] text-[var(--primary)] py-4 px-6 rounded-xl font-bold hover:bg-black/20 transition-colors flex items-center justify-center gap-2"
+            >
+              DOWNLOAD CSV (.CSV)
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({ duration: 800, once: true, offset: 50 });
+    </script>
+  </body>
+</html>
