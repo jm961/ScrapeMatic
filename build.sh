@@ -13,5 +13,8 @@ apt-get update && apt-get install -y \
     libxrandr2 libgbm1 libxkbcommon0 libasound2 \
     libatspi2.0-0
 
+# Install Playwright dependencies
+playwright install-deps
+
 # Install Playwright browsers
-playwright install chromium
+playwright install
